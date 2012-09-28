@@ -1,0 +1,2 @@
+---
+BUNDLE_BUILD__CHARLOCK_HOLMES: --with-icu-dir=/usr/lib/icu/current/
