@@ -14,9 +14,9 @@ Requirements
 
 * [VirtualBox](https://www.virtualbox.org)
 * [Vagrant](http://vagrantup.com)
-* A few gems: bundler, chef, librarian
-* Have the NFS packages installed (already there if you are using Mac OS)
-* And some patience :)
+* the NFS packages. Already there if you are using Mac OS, and
+  not necessary if you are using Windows.
+* some patience :)
 
 Installation
 ------------
