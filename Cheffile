@@ -10,6 +10,7 @@ cookbook 'perl'
 cookbook 'xml'
 cookbook 'zlib'
 cookbook 'mysql'
+cookbook 'postgresql'
 cookbook 'database'
 
 cookbook 'rvm',

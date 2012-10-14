@@ -147,13 +147,23 @@ template "#{node['gitlab']['app_home']}/config/database.yml" do
 end
 
 # Database information
-database_connexion = { :host     => 'localhost',
-                       :username => 'root',
-                       :password => node['mysql']['server_root_password'] }
+mysql_connexion = { :host     => 'localhost',
+                    :username => 'root',
+                    :password => node['mysql']['server_root_password'] }
+
+postgresql_connexion = { :host     => 'localhost',
+                         :username => 'postgres',
+                         :password => node['postgresql']['password']['postgres'] }
 
 # Create mysql user vagrant
 mysql_database_user 'vagrant' do
-  connection database_connexion
+  connection mysql_connexion
+  password 'vagrant'
+  action :create
+end
+
+postgresql_database_user 'vagrant' do
+  connection postgresql_connexion
   password 'vagrant'
   action :create
 end
@@ -161,17 +171,31 @@ end
 # Create databases and users
 %w{ gitlabhq_production gitlabhq_development gitlabhq_test }.each do |db|
   mysql_database "#{db}" do
-    connection database_connexion
+    connection mysql_connexion
     action :create
+  end
+
+  postgresql_database "#{db}" do
+    connection postgresql_connexion
+    action :create
+  end
+
+  # Undocumented: see http://tickets.opscode.com/browse/COOK-850
+  postgresql_database_user 'vagrant' do
+    connection postgresql_connexion
+    database_name db
+    password 'vagrant'
+    action :grant
   end
 end
 
 # Grant all privelages on all databases/tables from localhost to vagrant
 mysql_database_user 'vagrant' do
-  connection database_connexion
+  connection mysql_connexion
   password 'vagrant'
   action :grant
 end
+
 
 # Render Xvfb start service
 template "/etc/init.d/xvfb" do

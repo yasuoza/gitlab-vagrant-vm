@@ -1,5 +1,8 @@
+Gitlab-Vagrant-VM
+=================
+
 Description
-===========
+-----------
 
 Setup a dev environment for Gitlab.
 
@@ -7,30 +10,29 @@ The final product contain all databases set up, working tests and all gems
 installed.
 
 Requirements
-============
+------------
 
 * [VirtualBox](https://www.virtualbox.org)
 * [Vagrant](http://vagrantup.com)
-* A few gems: bundler, chef, librarian
-* Have the NFS packages installed (already there if you are using Mac OS)
-* And some patience :)
+* the NFS packages. Already there if you are using Mac OS, and
+  not necessary if you are using Windows.
+* some patience :)
 
 Installation
-============
+------------
 
-Install the required gem:
-
-```bash
-$ gem install bundler
-$ bundle install
-```
-
-Clone the repository and install chef's necessary packages:
+Clone the repository:
 
 ```bash
 $ git clone https://github.com/gitlabhq/gitlab-vagrant-vm
 $ cd gitlab-vagrant-vm
-$ librarian-chef install
+```
+
+And install gems and chef's necessary packages:
+
+```bash
+$ bundle install
+$ bundle exec librarian-chef install
 ```
 
 Finally, you should be able to use:
@@ -59,7 +61,7 @@ $ git remote set-url origin git://github.com/me/gitlab-vagrant-vm.git
 ```
 
 Virtual Machine Management
-==========================
+--------------------------
 
 When done just log out with `^D` and suspend the virtual machine
 
@@ -97,4 +99,19 @@ Finally, to completely wipe the virtual machine from the disk **destroying all i
 
 ```bash
 $ vagrant destroy # DANGER: all is gone
+```
+
+Information
+-----------
+
+* Virtual Machine IP: 192.168.3.14
+* User/password: vagrant/vagrant
+* MySQL user/password: vagrant/Vagrant
+* MySQL root password: nonrandompasswordsaregreattoo
+* Xvfb is used as a service and it should be already running, but in case you
+  need to restart it manually:
+
+```bash
+$ sudo /etc/init.d/xvfb stop
+$ sudo /etc/init.d/xvfb start
 ```

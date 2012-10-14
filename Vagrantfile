@@ -2,7 +2,16 @@ Vagrant::Config.run do |config|
   config.vm.box = "precise32"
   config.vm.box_url = "http://files.vagrantup.com/precise32.box"
   config.vm.network :hostonly, '192.168.3.14'
-  config.vm.share_folder("v-root", "/vagrant", ".", :nfs => true)
+
+  # Default user/group id for vagrant in precise32
+  host_user_id = 1000
+  host_group_id = 1000
+
+  if RUBY_PLATFORM =~ /linux|darwin/
+    config.vm.share_folder("v-root", "/vagrant", ".", :nfs => true)
+    host_user_id = Process.euid
+    host_group_id = Process.egid
+  end
 
   config.vm.provision :chef_solo do |chef|
     chef.cookbooks_path = ['cookbooks', 'site-cookbooks']
@@ -12,6 +21,9 @@ Vagrant::Config.run do |config|
 
     chef.add_recipe('mysql::server')
     chef.add_recipe('mysql::ruby')
+
+    chef.add_recipe('postgresql::server')
+    chef.add_recipe('postgresql::ruby')
 
     chef.add_recipe('database::mysql')
 
@@ -37,8 +49,8 @@ Vagrant::Config.run do |config|
         :server_debian_password => "nonrandompasswordsaregreattoo"
       },
       :gitlab => {
-        :host_user_id => Process.euid,
-        :host_group_id => Process.egid
+        :host_user_id => host_user_id,
+        :host_group_id => host_group_id
       }
     }
   end
