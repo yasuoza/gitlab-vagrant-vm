@@ -13,6 +13,9 @@ Vagrant::Config.run do |config|
     chef.add_recipe('mysql::server')
     chef.add_recipe('mysql::ruby')
 
+    chef.add_recipe('postgresql::server')
+    chef.add_recipe('postgresql::ruby')
+
     chef.add_recipe('database::mysql')
 
     # This is where all the magic happens.
