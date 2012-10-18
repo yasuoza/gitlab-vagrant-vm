@@ -55,9 +55,9 @@ You should also configure your own remote since by default it's going to grab
 gitlab's master branch.
 
 ```bash
-$ git remote add mine git://github.com/me/gitlab-vagrant-vm.git
+$ git remote add mine git://github.com/me/gitlabhq.git
 $ # or if you prefer set up your origin as your own repository
-$ git remote set-url origin git://github.com/me/gitlab-vagrant-vm.git
+$ git remote set-url origin git://github.com/me/gitlabhq.git
 ```
 
 Virtual Machine Management
