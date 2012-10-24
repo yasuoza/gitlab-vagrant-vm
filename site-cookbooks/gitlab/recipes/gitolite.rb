@@ -78,3 +78,11 @@ template "#{node['gitlab']['git_home']}/.gitolite.rc" do
     :gitolite_umask => node['gitlab']['gitolite_umask']
   )
 end
+
+# Gitolite common update hook template
+template "#{node['gitlab']['git_home']}/.gitolite/hooks/common/update" do
+  source "update.hook"
+  owner node['gitlab']['git_user']
+  group node['gitlab']['git_group']
+  mode 0755
+end
