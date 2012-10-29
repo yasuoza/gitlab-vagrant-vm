@@ -251,17 +251,24 @@ end
 %w{ development test }.each do |env|
   # Setup database
   execute "gitlab-#{env}-setup" do
-    command "su -l -c 'cd #{node['gitlab']['app_home']} &&
-      bundle exec rake db:setup RAILS_ENV=#{env}' vagrant"
+    command "su -l -c 'cd #{node['gitlab']['app_home']} && bundle exec rake db:setup RAILS_ENV=#{env}' vagrant"
     cwd node['gitlab']['app_home']
     user 'root'
+    not_if { File.exists?("#{node['gitlab']['home']}/.vagrant_seed") }
   end
 
   # Seed database
   execute "gitlab-#{env}-seed" do
-    command "su -l -c 'cd #{node['gitlab']['app_home']} &&
-      bundle exec rake db:seed_fu RAILS_ENV=#{env}' vagrant"
+    command "su -l -c 'cd #{node['gitlab']['app_home']} && bundle exec rake db:seed_fu RAILS_ENV=#{env}' vagrant"
     cwd node['gitlab']['app_home']
     user 'root'
+    not_if { File.exists?("#{node['gitlab']['home']}/.vagrant_seed") }
   end
+end
+
+# Create this file to avoid seeding again
+file "#{node['gitlab']['home']}/.vagrant_seed" do
+  owner node['gitlab']['user']
+  group node['gitlab']['group']
+  action :create
 end
