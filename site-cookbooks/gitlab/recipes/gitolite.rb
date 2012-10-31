@@ -54,7 +54,7 @@ end
 # Clone gitolite repo from github
 git node['gitlab']['gitolite_home'] do
   repository node['gitlab']['gitolite_url']
-  reference "master"
+  reference node['gitlab']['gitolite_ref']
   user node['gitlab']['git_user']
   group node['gitlab']['git_group']
   action :checkout
@@ -66,23 +66,4 @@ execute "gitolite-install" do
   cwd node['gitlab']['git_home']
   command "#{node['gitlab']['gitolite_home']}/install -ln #{node['gitlab']['git_home']}/bin"
   creates "#{node['gitlab']['git_home']}/bin/gitolite"
-end
-
-# Gitolite.rc template
-template "#{node['gitlab']['git_home']}/.gitolite.rc" do
-  source "gitolite.rc.erb"
-  owner node['gitlab']['git_user']
-  group node['gitlab']['git_group']
-  mode 0644
-  variables(
-    :gitolite_umask => node['gitlab']['gitolite_umask']
-  )
-end
-
-# Gitolite common update hook template
-template "#{node['gitlab']['git_home']}/.gitolite/hooks/common/update" do
-  source "update.hook"
-  owner node['gitlab']['git_user']
-  group node['gitlab']['git_group']
-  mode 0755
 end
