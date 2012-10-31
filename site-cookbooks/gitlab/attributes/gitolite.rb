@@ -28,6 +28,3 @@ default['gitlab']['git_home'] = "/var/git"
 
 # Set gitolite home directory
 default['gitlab']['gitolite_home'] = "#{node['gitlab']['git_home']}/gitolite"
-
-# Set gitolite umask
-default['gitlab']['gitolite_umask'] = "0007"
