@@ -28,6 +28,8 @@ Vagrant::Config.run do |config|
 
     chef.add_recipe('database::mysql')
 
+    chef.add_recipe('phantomjs')
+
     # This is where all the magic happens.
     # see site-cookbooks/gitlab/
     chef.add_recipe('gitlab::vagrant')
