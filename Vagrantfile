@@ -46,6 +46,9 @@ Vagrant::Config.run do |config|
         },
         :global_gems => [{ :name => 'bundler'}]
       },
+      :phantomjs => {
+        :version => '1.8.1'
+      },
       :mysql => {
         :server_root_password => "nonrandompasswordsaregreattoo",
         :server_repl_password => "nonrandompasswordsaregreattoo",
