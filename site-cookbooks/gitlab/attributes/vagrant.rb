@@ -3,6 +3,7 @@ default['gitlab']['user'] = "vagrant"
 default['gitlab']['group'] = "vagrant"
 default['gitlab']['home'] = "/home/vagrant"
 default['gitlab']['app_home'] = "/vagrant/gitlabhq"
+default['gitlab']['app_shell_home'] = "/vagrant/gitlab-shell"
 
 # Set github URL for gitlab
 default['gitlab']['gitlab_url'] = "git://github.com/gitlabhq/gitlabhq.git"
@@ -15,5 +16,8 @@ default['gitlab']['packages'] = %w{
   xvfb xfonts-100dpi xfonts-75dpi xfonts-scalable xfonts-cyrillic
 }
 
+# GitLab Shell
+default['gitlab']['gitlab_shell_url'] = "git://github.com/gitlabhq/gitlab-shell.git"
+default['gitlab']['gitlab_shell_branch'] = "master"
 default['gitlab']['trust_local_sshkeys'] = "yes"
 default['gitlab']['https'] = false

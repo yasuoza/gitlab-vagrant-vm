@@ -1,5 +1,5 @@
 # Include cookbook dependencies
-%w{ gitlab::gitolite build-essential
+%w{ gitlab::gitlab_shell build-essential
     readline openssh xml zlib python::package python::pip
     redisio::install redisio::enable }.each do |requirement|
   include_recipe requirement
@@ -25,16 +25,6 @@ python_pip "pygments" do
   action :install
 end
 
-# Add the gitlab user to the "git" group
-group node['gitlab']['git_group'] do
-  members node['gitlab']['user']
-end
-
-# Add the git user to the "gitlab" group
-group node['gitlab']['group'] do
-  members node['gitlab']['git_user']
-end
-
 # Create a $HOME/.ssh folder
 directory "#{node['gitlab']['home']}/.ssh" do
   owner node['gitlab']['user']
@@ -44,49 +34,6 @@ end
 
 # Generate and deploy ssh public/private keys
 Gem.clear_paths
-if File.exists?(node['gitlab']['home'] + '/.ssh/id_rsa.pub')
-  require 'ostruct'
-  gitlab_sshkey = OpenStruct.new
-  gitlab_sshkey.ssh_private_key = File.open(node['gitlab']['home'] + '/.ssh/id_rsa', 'rb').read
-  gitlab_sshkey.ssh_public_key = File.open(node['gitlab']['home'] + '/.ssh/id_rsa.pub', 'rb').read
-else
-  require 'sshkey'
-  gitlab_sshkey = SSHKey.generate(:type => 'RSA', :comment => "#{node['gitlab']['user']}@#{node['fqdn']}")
-end
-
-node.set_unless['gitlab']['public_key'] = gitlab_sshkey.ssh_public_key
-
-# Render private key template
-template "#{node['gitlab']['home']}/.ssh/id_rsa" do
-  owner node['gitlab']['user']
-  group node['gitlab']['group']
-  variables(
-    :private_key => gitlab_sshkey.private_key
-  )
-  mode 0600
-  not_if { File.exists?("#{node['gitlab']['home']}/.ssh/id_rsa") }
-end
-
-# Render public key template for gitlab user
-template "#{node['gitlab']['home']}/.ssh/id_rsa.pub" do
-  owner node['gitlab']['user']
-  group node['gitlab']['group']
-  mode 0644
-  variables(
-    :public_key => node['gitlab']['public_key']
-  )
-end
-
-# Render public key template for gitolite user
-template "#{node['gitlab']['git_home']}/gitlab.pub" do
-  source "id_rsa.pub.erb"
-  owner node['gitlab']['git_user']
-  group node['gitlab']['git_group']
-  mode 0644
-  variables(
-    :public_key => node['gitlab']['public_key']
-  )
-end
 
 # Configure gitlab user to auto-accept localhost SSH keys
 template "#{node['gitlab']['home']}/.ssh/config" do
@@ -98,16 +45,6 @@ template "#{node['gitlab']['home']}/.ssh/config" do
     :fqdn => node['fqdn'],
     :trust_local_sshkeys => node['gitlab']['trust_local_sshkeys']
   )
-end
-
-# Sorry for this ugliness.
-# It seems maybe something is wrong with the 'gitolite setup' script.
-# This was implemented as a workaround.
-execute "install-gitlab-key" do
-  command "su - #{node['gitlab']['git_user']} -c 'perl #{node['gitlab']['gitolite_home']}/src/gitolite setup -pk #{node['gitlab']['git_home']}/gitlab.pub'"
-  user "root"
-  cwd node['gitlab']['git_home']
-  not_if "grep -q '#{node['gitlab']['user']}' #{node['gitlab']['git_home']}/.ssh/authorized_keys"
 end
 
 # Clone Gitlab repo from github
