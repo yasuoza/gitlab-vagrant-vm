@@ -20,3 +20,10 @@ execute "gitlab-shell install" do
   cwd node['gitlab']['app_shell_home']
   user 'root'
 end
+
+# Create a $HOME/repositories folder
+directory "#{node['gitlab']['repos_path']}" do
+  owner node['gitlab']['user']
+  group node['gitlab']['group']
+  mode 0755
+end

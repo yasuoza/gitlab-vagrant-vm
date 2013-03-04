@@ -3,6 +3,7 @@ default['gitlab']['user'] = "vagrant"
 default['gitlab']['group'] = "vagrant"
 default['gitlab']['home'] = "/home/vagrant"
 default['gitlab']['app_home'] = "/vagrant/gitlabhq"
+default['gitlab']['repos_path'] = "/vagrant/repositories"
 default['gitlab']['app_shell_home'] = "/vagrant/gitlab-shell"
 
 # Set github URL for gitlab

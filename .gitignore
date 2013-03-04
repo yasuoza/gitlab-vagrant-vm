@@ -1,4 +1,6 @@
 tmp/
 cookbooks/
 gitlabhq/
+gitlab-shell/
+repositories/
 .vagrant

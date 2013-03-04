@@ -113,7 +113,7 @@ production: &base
   # GitLab Satellites
   satellites:
     # Relative paths are relative to Rails.root (default: tmp/repo_satellites/)
-    path: /home/git/gitlab-satellites/
+    path: /vagrant/gitlab-satellites/
 
   ## Backup settings
   backup:
@@ -123,8 +123,8 @@ production: &base
   ## GitLab Shell settings
   gitlab_shell:
     # REPOS_PATH MUST NOT BE A SYMLINK!!!
-    repos_path: /home/git/repositories/
-    hooks_path: /home/git/gitlab-shell/hooks/
+    repos_path: /vagrant/repositories/
+    hooks_path: /vagrant/gitlab-shell/hooks/
 
     # Git over HTTP
     upload_pack: true
