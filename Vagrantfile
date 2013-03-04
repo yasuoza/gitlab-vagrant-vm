@@ -44,7 +44,9 @@ Vagrant::Config.run do |config|
         :vagrant => {
           :system_chef_solo => '/opt/vagrant_ruby/bin/chef-solo'
         },
-        :global_gems => [{ :name => 'bundler'}]
+        :global_gems => [{ :name => 'bundler'}],
+        :branch => 'none',
+        :version => '1.17.10'
       },
       :phantomjs => {
         :version => '1.8.1'
