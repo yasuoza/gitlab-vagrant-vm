@@ -15,7 +15,12 @@ Requirements
 * [VirtualBox](https://www.virtualbox.org)
 * [Vagrant](http://vagrantup.com)
 * the NFS packages. Already there if you are using Mac OS, and
-  not necessary if you are using Windows.
+  not necessary if you are using Windows. On Linux:
+
+```bash
+$ sudo apt-get install nfs-kernel-server nfs-common portmap
+```
+
 * some patience :)
 
 Installation
