@@ -45,6 +45,8 @@ Finally, you should be able to use:
 ```bash
 $ vagrant up
 ```
+**Note:**
+You can't use a vagrant project on an encrypted partition (ie. it won't work if your home directory is encrypted).
 
 You'll be asked for your password to set up NFS shares.
 
