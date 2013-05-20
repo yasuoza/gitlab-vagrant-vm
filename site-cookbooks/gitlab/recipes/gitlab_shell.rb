@@ -20,3 +20,8 @@ execute "gitlab-shell install" do
   cwd node['gitlab']['app_shell_home']
   user 'root'
 end
+
+# Symlink gitlab-shell to vagrant home, so that sidekiq can use gitlab shell commands
+link "#{node['gitlab']['home']}/gitlab-shell" do
+  to node['gitlab']['app_shell_home']
+end

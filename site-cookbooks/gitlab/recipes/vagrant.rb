@@ -67,6 +67,15 @@ directory "#{node['gitlab']['app_home']}/tmp/repositories" do
   action :create
 end
 
+# Create /vagrant/repositories to be used as repositories folder
+directory node['gitlab']['repos_path'] do
+  owner node['gitlab']['host_user_id']
+  group node['gitlab']['host_group_id']
+  mode "0755"
+  recursive true
+  action :create
+end
+
 # Render gitlab config file
 template "#{node['gitlab']['app_home']}/config/gitlab.yml" do
   user node['gitlab']['host_user_id']

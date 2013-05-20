@@ -5,7 +5,7 @@ user: vagrant
 gitlab_url: "http://localhost/"
 
 # Repositories path
-repos_path: "/home/vagrant"
+repos_path: <%= node['gitlab']['repos_path'] %>
 
 # File used as authorized_keys for gitlab user
 auth_file: "/home/vagrant/.ssh/authorized_keys"

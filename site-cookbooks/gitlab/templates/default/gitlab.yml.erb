@@ -23,7 +23,7 @@ production: &base
     # relative_url_root: /gitlab
 
     # Uncomment and customize if you can't use the default user to run GitLab (default: 'git')
-    # user: git
+    user: <%= node['gitlab']['user'] %>
 
     ## Email settings
     # Email address used in the "From" field in mails sent by GitLab
@@ -113,7 +113,7 @@ production: &base
   # GitLab Satellites
   satellites:
     # Relative paths are relative to Rails.root (default: tmp/repo_satellites/)
-    path: /vagrant/gitlab-satellites/
+    path: <%= node['gitlab']['repos_satellites'] %>
 
   ## Backup settings
   backup:
@@ -123,8 +123,8 @@ production: &base
   ## GitLab Shell settings
   gitlab_shell:
     # REPOS_PATH MUST NOT BE A SYMLINK!!!
-    repos_path: /vagrant/repositories/
-    hooks_path: /vagrant/gitlab-shell/hooks/
+    repos_path: <%= node['gitlab']['repos_path'] %>
+    hooks_path: <%= "#{node['gitlab']['app_shell_home']}/hooks/" %>
 
     # Git over HTTP
     upload_pack: true
