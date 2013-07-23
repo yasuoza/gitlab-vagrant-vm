@@ -20,6 +20,7 @@ Requirements
 ```bash
 $ sudo apt-get install nfs-kernel-server nfs-common portmap
 ```
+On OS X you can also choose to use [the (commercial) Vagrant VMware Fusion plugin](http://www.vagrantup.com/vmware) instead of VirtualBox.
 
 * some patience :)
 
