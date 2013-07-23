@@ -72,7 +72,7 @@ Vagrant.configure("2") do |config|
     config.vm.provider :vmware_fusion do |v, override|
         override.vm.box="precise64"
         override.vm.box_url = "http://files.vagrantup.com/precise64_vmware.box"
-        v.vm["memsize"] = MEMORY
+        v.vmx["memsize"] = MEMORY
         v.vmx["numvcpus"] = CORES
     end
 
