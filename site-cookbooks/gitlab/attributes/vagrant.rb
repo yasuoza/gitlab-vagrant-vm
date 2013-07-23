@@ -17,6 +17,7 @@ default['gitlab']['packages'] = %w{
   libicu-dev libc6-dev libyaml-dev python python-dev libqt4-dev libqtwebkit-dev
   xvfb xfonts-100dpi xfonts-75dpi xfonts-scalable xfonts-cyrillic
 }
+default['gitlab']['ruby_version'] = '1.9.3-p448'
 
 # GitLab Shell
 default['gitlab']['gitlab_shell_url'] = "git://github.com/gitlabhq/gitlab-shell.git"
