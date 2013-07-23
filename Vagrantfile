@@ -68,6 +68,7 @@ Vagrant.configure("2") do |config|
         override.vm.box="precise64"
         override.vm.box_url = "http://files.vagrantup.com/precise64_vmware.box"
         v.vm["memsize"] = "1024"
+        # v.vmx["numvcpus"] = "2" # uncomment to use more CPU cores
     end
 
     config.vm.provider :virtualbox do |v, override|
