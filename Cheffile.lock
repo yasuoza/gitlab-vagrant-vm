@@ -17,6 +17,7 @@ SITE
     mysql (2.1.2)
       build-essential (>= 0.0.0)
       openssl (>= 0.0.0)
+    ohai (1.1.10)
     openssh (1.0.0)
     openssl (1.0.0)
     perl (1.0.2)
@@ -26,6 +27,10 @@ SITE
     python (1.0.8)
       build-essential (>= 0.0.0)
       yum (>= 0.0.0)
+    rbenv (1.4.2)
+      build-essential (>= 0.0.0)
+      git (>= 0.0.0)
+      ohai (>= 1.1)
     readline (0.0.3)
     redisio (1.1.0)
     runit (0.15.0)
@@ -33,13 +38,6 @@ SITE
     xml (1.0.4)
     yum (0.8.2)
     zlib (1.0.0)
-
-GIT
-  remote: git://github.com/fnichol/chef-rvm.git
-  ref: v0.9.0
-  sha: 4a408e5d6c5a52c37388a799c516430263339849
-  specs:
-    rvm (0.9.0)
 
 DEPENDENCIES
   build-essential (>= 0)
@@ -51,9 +49,9 @@ DEPENDENCIES
   phantomjs (>= 0)
   postgresql (>= 0)
   python (>= 0)
+  rbenv (~> 1.4.2)
   readline (>= 0)
   redisio (>= 0)
-  rvm (>= 0)
   xml (>= 0)
   zlib (>= 0)
 

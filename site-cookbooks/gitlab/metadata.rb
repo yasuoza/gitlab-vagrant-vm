@@ -1,5 +1,5 @@
 long_description IO.read(File.join(File.dirname(__FILE__), 'README.md'))
-%w{ git redisio build-essential python readline openssl perl xml zlib}.each do |cb_depend|
+%w{ git redisio build-essential python readline openssl perl xml zlib rbenv }.each do |cb_depend|
   depends cb_depend
 end
 %w{ debian ubuntu }.each do |os|

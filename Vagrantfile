@@ -21,9 +21,6 @@ Vagrant::Config.run do |config|
   config.vm.provision :chef_solo do |chef|
     chef.cookbooks_path = ['cookbooks', 'site-cookbooks']
 
-    chef.add_recipe('rvm::vagrant')
-    chef.add_recipe('rvm::user')
-
     chef.add_recipe('mysql::server')
     chef.add_recipe('mysql::ruby')
 
@@ -39,19 +36,6 @@ Vagrant::Config.run do |config|
     chef.add_recipe('gitlab::vagrant')
 
     chef.json = {
-      :rvm => {
-        :user_installs => [
-          { :user         => 'vagrant',
-            :default_ruby => '1.9.3'
-          }
-        ],
-        :vagrant => {
-          :system_chef_solo => '/opt/vagrant_ruby/bin/chef-solo'
-        },
-        :global_gems => [{ :name => 'bundler'}],
-        :branch => 'none',
-        :version => '1.17.10'
-      },
       :phantomjs => {
         :version => '1.8.1'
       },

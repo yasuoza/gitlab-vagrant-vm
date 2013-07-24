@@ -18,6 +18,9 @@ default['gitlab']['packages'] = %w{
   xvfb xfonts-100dpi xfonts-75dpi xfonts-scalable xfonts-cyrillic
 }
 
+default['gitlab']['ruby_version'] = '1.9.3-p448'
+default['gitlab']['rbenv']['group_users'] = [default['gitlab']['user']]
+
 # GitLab Shell
 default['gitlab']['gitlab_shell_url'] = "git://github.com/gitlabhq/gitlab-shell.git"
 default['gitlab']['gitlab_shell_branch'] = "master"

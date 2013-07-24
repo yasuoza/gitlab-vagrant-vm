@@ -14,6 +14,5 @@ cookbook 'postgresql'
 cookbook 'database'
 cookbook 'phantomjs'
 
-cookbook 'rvm',
-  :git => 'git://github.com/fnichol/chef-rvm.git',
-  :ref => 'v0.9.0'
+# rbenv-cookbook >= 1.5.0 indirectly needs Chef 11
+cookbook 'rbenv', '~> 1.4.2'
