@@ -13,6 +13,4 @@ cookbook 'mysql'
 cookbook 'postgresql'
 cookbook 'database'
 cookbook 'phantomjs'
-
-# rbenv-cookbook >= 1.5.0 indirectly needs Chef 11
-cookbook 'rbenv', '~> 1.4.2'
+cookbook 'rbenv'
