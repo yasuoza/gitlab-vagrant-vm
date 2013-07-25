@@ -19,7 +19,8 @@ default['gitlab']['packages'] = %w{
 }
 
 default['gitlab']['ruby_version'] = '1.9.3-p448'
-default['gitlab']['rbenv']['group_users'] = [default['gitlab']['user']]
+default['rbenv']['user'] = default['gitlab']['user']
+default['rbenv']['group'] = default['gitlab']['group']
 
 # GitLab Shell
 default['gitlab']['gitlab_shell_url'] = "git://github.com/gitlabhq/gitlab-shell.git"
