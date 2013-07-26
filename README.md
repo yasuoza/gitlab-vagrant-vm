@@ -130,6 +130,9 @@ $ sudo /etc/init.d/xvfb stop
 $ sudo /etc/init.d/xvfb start
 ```
 
+* Install a new Ruby: `rbenv install 2.0.0-p247`
+* Switch to a different Ruby: `rbenv global 2.0.0-p247`
+
 Updating
 ---------------
 
@@ -146,19 +149,3 @@ $ cd gitlabhq && git pull --ff origin master
 ```
 
 A bit of background on why this is needed. When you run 'vagrant up' there is a [checkout action in the recipe](https://github.com/gitlabhq/gitlab-vagrant-vm/blob/master/site-cookbooks/gitlab/recipes/vagrant.rb#L54) that [points to](https://github.com/gitlabhq/gitlab-vagrant-vm/blob/master/site-cookbooks/gitlab/attributes/vagrant.rb#L10) the [gitlabhq repo](https://github.com/gitlabhq/gitlabhq). You won't see any difference when running 'git status' in the gitlab-vagrant-vm repo because gitlabhq/ is in the [.gitignore](https://github.com/gitlabhq/gitlab-vagrant-vm/blob/master/.gitignore). You can update the gitlabhq repo yourself or remove the gitlabhq directory so the repo is checked out again.
-
-
-Troubleshooting
----------------
-
-### Error executing action `install` on resource 'rvm_global_gem[bundler]' in chef when booting VM
-Stacktrace of this failure can be found in this [gist](https://gist.github.com/3a8410c08c654a95c826) .
-This is caused by an [error in rvm](https://github.com/wayneeseguin/rvm/issues/1266) which causes chef-rvm cookbook to fail.
-This problem should be fixed with rvm version 1.16.18.
-Temporary solution for this is provided in [this commit](https://github.com/gpsnail/chef-rvm/commit/203a785bf217bf90115c2a3f8a479225b27d5483).
-In cookbooks/rvm/libraries/chef_rvm_ruby_helpers.rb change the line 41 to
-
-```
-@installed_rubies = @rvm_env.list_strings.reject {|e| e == 'nil'}
-```
-and run vagrant up again to complete the installation.
