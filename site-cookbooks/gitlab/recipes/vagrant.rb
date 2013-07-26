@@ -171,7 +171,8 @@ template "/etc/bash.bashrc" do
   owner "root"
   group "root"
   mode 0755
-  source "bash.bashrc"
+  source "bash.bashrc.erb"
+  variables :rbenv_root => node['rbenv']['root']
 end
 
 # Create directory for bundle options.
