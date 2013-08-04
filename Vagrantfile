@@ -23,6 +23,7 @@ Vagrant::Config.run do |config|
   config.vm.provision :chef_solo do |chef|
     chef.cookbooks_path = ['cookbooks', 'site-cookbooks']
 
+    chef.add_recipe('zsh')
 
     chef.add_recipe('ruby_build')
     chef.add_recipe('rbenv::vagrant')

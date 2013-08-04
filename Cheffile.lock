@@ -34,6 +34,7 @@ SITE
     xml (1.0.4)
     yum (0.8.2)
     zlib (1.0.0)
+    zsh (1.0.0)
 
 GIT
   remote: git://github.com/fnichol/chef-rbenv.git
@@ -41,13 +42,6 @@ GIT
   sha: f2b53292e810dd2b43f6121f9958f5f29979dcb1
   specs:
     rbenv (0.7.2)
-
-GIT
-  remote: git://github.com/fnichol/chef-rvm.git
-  ref: v0.9.0
-  sha: 4a408e5d6c5a52c37388a799c516430263339849
-  specs:
-    rvm (0.9.0)
 
 DEPENDENCIES
   build-essential (>= 0)
@@ -63,7 +57,7 @@ DEPENDENCIES
   readline (>= 0)
   redisio (>= 0)
   ruby_build (>= 0)
-  rvm (>= 0)
   xml (>= 0)
   zlib (>= 0)
+  zsh (>= 0)
 
