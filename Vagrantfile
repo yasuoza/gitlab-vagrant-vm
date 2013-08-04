@@ -68,6 +68,9 @@ Vagrant::Config.run do |config|
       :phantomjs => {
         :version => '1.8.1'
       },
+      :redisio => {
+        :version => '2.6.14'
+      },
       :mysql => {
         :server_root_password => "nonrandompasswordsaregreattoo",
         :server_repl_password => "nonrandompasswordsaregreattoo",
