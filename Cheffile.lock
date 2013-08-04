@@ -28,11 +28,19 @@ SITE
       yum (>= 0.0.0)
     readline (0.0.3)
     redisio (1.1.0)
+    ruby_build (0.8.0)
     runit (0.15.0)
     xfs (1.0.0)
     xml (1.0.4)
     yum (0.8.2)
     zlib (1.0.0)
+
+GIT
+  remote: git://github.com/fnichol/chef-rbenv.git
+  ref: v0.7.2
+  sha: f2b53292e810dd2b43f6121f9958f5f29979dcb1
+  specs:
+    rbenv (0.7.2)
 
 GIT
   remote: git://github.com/fnichol/chef-rvm.git
@@ -51,8 +59,10 @@ DEPENDENCIES
   phantomjs (>= 0)
   postgresql (>= 0)
   python (>= 0)
+  rbenv (>= 0)
   readline (>= 0)
   redisio (>= 0)
+  ruby_build (>= 0)
   rvm (>= 0)
   xml (>= 0)
   zlib (>= 0)

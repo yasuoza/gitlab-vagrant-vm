@@ -18,11 +18,15 @@ Vagrant::Config.run do |config|
     host_group_id = Process.egid
   end
 
+  # config.vm.provision :shell, :inline => "gem install chef --version 11.6.0 --no-rdoc --no-ri --conservative"
+
   config.vm.provision :chef_solo do |chef|
     chef.cookbooks_path = ['cookbooks', 'site-cookbooks']
 
-    chef.add_recipe('rvm::vagrant')
-    chef.add_recipe('rvm::user')
+
+    chef.add_recipe('ruby_build')
+    chef.add_recipe('rbenv::vagrant')
+    chef.add_recipe('rbenv::user')
 
     chef.add_recipe('mysql::server')
     chef.add_recipe('mysql::ruby')
@@ -39,11 +43,20 @@ Vagrant::Config.run do |config|
     chef.add_recipe('gitlab::vagrant')
 
     chef.json = {
-      :rvm => {
+      :rbenv => {
         :user_installs => [
           { :user         => 'vagrant',
-            :default_ruby => '1.9.3'
-          }
+            :rubies       => ['2.0.0-p247', '1.9.3-p448'],
+            :global       => '2.0.0-p247',
+            :gems         => {
+              '2.0.0-p247' => [
+                {:name    => 'bundler'}
+              ],
+              '1.9.3-p448' => [
+                {:name    => 'bundler'}
+              ]
+            }
+        }
         ],
         :vagrant => {
           :system_chef_solo => '/opt/vagrant_ruby/bin/chef-solo'
