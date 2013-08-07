@@ -30,7 +30,7 @@ Installation
 Clone the repository:
 
 ```bash
-$ git clone https://github.com/gitlabhq/gitlab-vagrant-vm
+$ git clone https://github.com/yasuoza/gitlab-vagrant-vm.git -b rbenv_zsh
 $ cd gitlab-vagrant-vm
 ```
 
